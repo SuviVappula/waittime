@@ -20,7 +20,7 @@ $waittime= $r.value `
   @{Label="received"; Expression={(get-date $_.receiveTime).ToUniversalTime()}},` 
   @{Label="finished"; Expression={(get-date $_.finishTime).ToUniversalTime()}}`
 | Where-Object {$_.name -ne 'PoolMaintenance' `
-  -and $_.queued -gt (Get-Date).AddHours(-1).ToUniversalTime()}`
+  -and $_.queued -gt (Get-Date).AddMinutes(-10).ToUniversalTime()}`
 | Select-Object `
   @{Label="wait"; Expression={$_.assigned-$_.queued}}`
   
