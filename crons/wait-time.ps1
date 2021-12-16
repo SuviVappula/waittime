@@ -4,7 +4,7 @@ $token = $Env:PAT
 $bytes = [System.Text.Encoding]::UTF8.GetBytes(":$($token)")
 $base64bytes = [System.Convert]::ToBase64String($bytes)
 $headers = @{ "Authorization" = "Basic $base64bytes"}
-$uri = 'https://dev.azure.com/City-of-Helsinki/_apis/distributedtask/pools/1/jobrequests'
+$uri = $Env:URI
 $r = Invoke-RestMethod -Uri $uri -Headers $headers -Method Get -ContentType "application/json"
 $count = 0
 
