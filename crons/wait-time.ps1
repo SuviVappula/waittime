@@ -49,7 +49,7 @@ $waittime | ForEach {
 		
 		$dictProperties.Add('waittime', $seconds)
 		$dictMetrics.Add('waittime', $seconds)
-		$client.TrackEvent('Azure waittime '$pool, $dictProperties, $dictMetrics)
+		$client.TrackEvent($pool, $dictProperties, $dictMetrics)
 		$client.Flush()
 	}
 	$count++
