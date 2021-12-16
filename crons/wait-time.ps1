@@ -5,6 +5,7 @@ $bytes = [System.Text.Encoding]::UTF8.GetBytes(":$($token)")
 $base64bytes = [System.Convert]::ToBase64String($bytes)
 $headers = @{ "Authorization" = "Basic $base64bytes"}
 $uri = $Env:URI
+$pool = $Env:pool
 $r = Invoke-RestMethod -Uri $uri -Headers $headers -Method Get -ContentType "application/json"
 $count = 0
 
@@ -48,7 +49,7 @@ $waittime | ForEach {
 		
 		$dictProperties.Add('waittime', $seconds)
 		$dictMetrics.Add('waittime', $seconds)
-		$client.TrackEvent('Azure waittime', $dictProperties, $dictMetrics)
+		$client.TrackEvent('Azure waittime $pool', $dictProperties, $dictMetrics)
 		$client.Flush()
 	}
 	$count++
